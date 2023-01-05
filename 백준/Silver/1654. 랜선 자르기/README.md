@@ -26,3 +26,36 @@
 
  <p>첫째 줄에 N개를 만들 수 있는 랜선의 최대 길이를 센티미터 단위의 정수로 출력한다.</p>
 
+###  풀이
+```python
+
+k, n = map(int, (input().split()))
+lan_list = []
+for i in range(k):
+    lan = int(input())
+    lan_list.append(lan)
+
+start = 1
+half = 0
+end = max(lan_list)
+total = 0
+
+while start <= end:
+    total = 0
+    half = (start + end) // 2
+    for elements in lan_list:
+        total += elements // half
+    if total >= n:
+        start = half + 1
+    elif total < n:
+        end = half - 1
+    
+print(end)
+```
+
+- 이진 탐색은 처음 접해서 고민하다가 결국 다른 코드 참고했다..
+- 가능한 길이는 1(start)부터 k개의 랜선 중 가장 긴 랜선의 길이(end)까지
+- 탐색이 종료될 때까지 반복문을 돌린다
+- 길이의 중간값을 half로 두고 모든 랜선의 길이를 나눠 나뉘어진 총 랜선의 개수를 구한다
+- 랜선이 n보다 많으면 start = half + 1, n보다 적다면 end = half - 1
+- 여기서는 랜선 길이의 최대값을 구하는 것으로 half 값이 아닌 end값을 답으로 출력한다
