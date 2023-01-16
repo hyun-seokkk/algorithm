@@ -1,5 +1,3 @@
-num = int(input())
-
-for _ in range(num):
-    a, b = map(int, input().split())
-    print(a+b)
+T = int(input())
+for _ in range(T):
+    print(sum(map(int, input().split())))
