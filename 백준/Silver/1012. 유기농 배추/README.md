@@ -100,4 +100,53 @@
 ### 출력 
 
  <p>각 테스트 케이스에 대해 필요한 최소의 배추흰지렁이 마리 수를 출력한다.</p>
+ 
+### 풀이
+
+```py
+import sys
+input = sys.stdin.readline
+sys.setrecursionlimit(10000)
+
+def dfs(x, y):
+    
+    # 테두리를 벗어나면 False 리턴
+    if x < 0 or x >= n or y < 0 or y >= m: 
+        return False
+    if farm[x][y] == 1:
+        # 현재 좌표의 값이 1이라면 방문처리
+        farm[x][y] = 0 
+
+        # 상하좌우 좌표 탐색 반복
+        dfs(x, y+1)
+        dfs(x, y-1)
+        dfs(x+1, y)
+        dfs(x-1, y)
+        return True
+    else:
+        return False
+
+t = int(input())
+for _ in range(t):
+    cnt = 0
+    m, n, k = map(int, input().split())
+    farm = [[0 for col in range(m)] for row in range(n)]
+
+    # 배추가 있는 2차원 리스트 생성
+    for i in range(k):
+        x, y = map(int, input().split())
+        farm[y][x] = 1
+
+    for i in range(n):
+        for j in range(m):
+            if dfs(i, j):
+                # 한 구간을 탐색했다면 count 증가
+                cnt += 1
+    print(cnt)
+```
+
+- dfs를 이용해 0,0 지점부터 1이면 방문처리, 상하좌우 좌표를 탐색하였다
+- dfs가 끝까지 실행되었다면 return값을 True로 받아 count를 1씩 올렸다
+- 기본적인 dfs 문제였지만 처음 풀어봤기 때문에 생각보다 까다로웠다
+- 리스트 범위를 벗어날 수 없도록 하는 조건식을 조금 더 집중해서 짜야할 것 같다.. 이거 때문에 한참 헤맸다 ㅠㅠ
 
