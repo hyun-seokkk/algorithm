@@ -6,13 +6,21 @@ def bfs():
     q = deque()
     q.append(1)
     
+
     while q:
         x = q.popleft()
         for i in range(1, pc+1):
             if network[x][i] == True and not visited[x][i]:
                 q.append(i)
                 visited[x][i] = True
+
+def dfs(x):
     
+    for i in range(1, pc+1):
+        if network[x][i] == True and not visited[x][i]:
+            visited[x][i] = True
+            dfs(i)
+
 pc = int(input())
 connect = int(input())
 
@@ -23,7 +31,9 @@ for _ in range(connect):
     a, b = map(int, input().split())
     network[a][b] = network[b][a] = True
 
-bfs()
+
+#bfs()
+dfs(1)
 
 cnt = 0
 for i in visited:
