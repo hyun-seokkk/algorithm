@@ -1,9 +1,6 @@
 n = int(input())
 for i in reversed(range(n+1)):
-    res = ''
-    for j in str(i):
-        if j == '4' or j == '7':
-            res += j
-    if res and i == int(res):
-        print(i)
+    now = str(i)
+    if len(now) == now.count('4') + now.count('7'):
+        print(now)
         break
