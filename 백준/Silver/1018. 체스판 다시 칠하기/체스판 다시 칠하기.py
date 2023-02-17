@@ -1,50 +1,18 @@
+def check(n, m):
+    cnt = 0
+    for x in range(n, n+8):
+        for y in range(m, m+8):
+            if (x+y) % 2 == 0 and board[x][y] == 'B':
+                cnt += 1
+            if (x+y) % 2 == 1 and board[x][y] == 'W':
+                cnt += 1
+    change=min(cnt, 64-cnt)
+    return change
 
 n, m = map(int, input().split())
-
-board = list()
-for _ in range(n):
-    str = input()
-    board.append(str)
-
-
-
-cnt_list = list()
-
-for k in range(n-7):
-    for l in range(m-7):
-            cnt = 0
-            for i in range(k, k+8): #시작점이 w일 경우
-                for j in range(l, l+8):
-                    if i % 2 == 0 and j % 2 == 0:  #시작점이 W면 짝수, 짝수 / 홀수, 홀수가 W
-                        if board[i][j] == 'B':
-                            cnt += 1
-                    elif i % 2 == 1 and j % 2 == 1:
-                        if board[i][j] == 'B':
-                            cnt += 1
-                    elif i % 2 == 0 and j % 2 == 1:
-                        if board[i][j] == 'W':
-                            cnt += 1
-                    elif i % 2 == 1 and j % 2 == 0:
-                        if board[i][j] == 'W':
-                            cnt += 1
-            cnt_list.append(cnt)
-
-            cnt = 0
-
-            for i in range(k, k+8): #시작점이 B일 경우
-                for j in range(l, l+8):
-                    if i % 2 == 0 and j % 2 == 0: 
-                        if board[i][j] == 'W':
-                            cnt += 1
-                    elif i % 2 == 1 and j % 2 == 1:
-                        if board[i][j] == 'W':
-                            cnt += 1
-                    elif i % 2 == 0 and j % 2 == 1:
-                        if board[i][j] == 'B':
-                            cnt += 1
-                    elif i % 2 == 1 and j % 2 == 0:
-                        if board[i][j] == 'B':
-                            cnt += 1
-            cnt_list.append(cnt)
-
-print(min(cnt_list))
+board = [input() for i in range(n)]
+res = 64
+for i in range(0, n-7):
+	for k in range(0, m-7):
+            res = min(res, check(i, k))
+print(res)
