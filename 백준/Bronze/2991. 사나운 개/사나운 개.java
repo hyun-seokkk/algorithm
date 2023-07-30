@@ -10,10 +10,10 @@ public class Main {
 	private static int check(int t) {
 		int atk = 0;
 		
-		if(t%(a+b) <= a && t%(a+b) != 0) {
+		if(t%(a+b) <= a && t%(a+b) > 0) {
 			atk++;
 		}
-		if(t%(c+d) <= c && t%(c+d) != 0) {
+		if(t%(c+d) <= c && t%(c+d) > 0) {
 			atk++;
 		}
 		
