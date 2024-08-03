@@ -10,14 +10,11 @@ public class Main {
         String[] arr = br.readLine().split("");
 
         ArrayDeque<String> stack = new ArrayDeque<>();
-        int gwalhoCnt = 0;
-
         for (String s : arr) {
 
             if(s.equals("(")) {
                 stack.push(s);
             } else if(s.equals(")")) {
-                gwalhoCnt--;
                 while (!stack.isEmpty() && !stack.peek().equals("(")) {
                     System.out.print(stack.pop());
                 }
